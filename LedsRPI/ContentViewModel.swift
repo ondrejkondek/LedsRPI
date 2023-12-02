@@ -10,9 +10,19 @@ import SwiftUI
 @Observable
 class ContentViewModel {
     var pickedColor: Color = .white
+    var brightness = 100.0
     var isPowerOn: Bool = false
     
+    let networkManager = NetworkManager()
+    
     func setColor() {
-        print("setColor: ", pickedColor)
+        Task {
+            do {
+                let result = try await networkManager.get(body: MockModel.self)
+                print(result)
+            } catch {
+                print("error")
+            }
+        }
     }
 }

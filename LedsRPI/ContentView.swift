@@ -15,27 +15,14 @@ struct ContentView: View {
             Image(.ledsBg)
                 .resizable()
                 .frame(width: UIScreen.main.bounds.width - 40, height: 200)
-
+            
             ScrollView {
                 Spacer(minLength: 220)
-                VStack {
-                    CardBox {
-                        Text("colors")
-                            .primaryText()
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: Spacing.medium) {
-                                ColorCell(color: .white, pickedColor: $viewModel.pickedColor)
-                                ColorCell(color: .blue, pickedColor: $viewModel.pickedColor)
-                                ColorCell(color: .red, pickedColor: $viewModel.pickedColor)
-                                ColorCell(color: .yellow, pickedColor: $viewModel.pickedColor)
-                                ColorCell(color: .green, pickedColor: $viewModel.pickedColor)
-                                PickColorCell(pickedColor: $viewModel.pickedColor)
-                            }
-                        }
-                        .scrollClipDisabled()
-                    }
-                    .padding()
+                VStack(spacing: Spacing.medium) {
+                    colorsCard
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -52,9 +39,9 @@ struct ContentView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("LEDs")
-        .onAppear {
-            UIScrollView.appearance().bounces = false
-        }
+        //        .onAppear {
+        //            UIScrollView.appearance().bounces = false
+        //        }
         .onChange(of: viewModel.pickedColor) {
             if viewModel.isPowerOn {
                 viewModel.setColor()
@@ -71,6 +58,29 @@ struct ContentView: View {
             return Image(systemName: "power.circle")
                 .fontWeight(.medium)
                 .foregroundColor(.white)
+        }
+    }
+    
+    var colorsCard: some View {
+        CardBox {
+            Text("colors")
+                .primaryText()
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: Spacing.medium) {
+                    ColorCell(color: .white, pickedColor: $viewModel.pickedColor)
+                    ColorCell(color: .blue, pickedColor: $viewModel.pickedColor)
+                    ColorCell(color: .red, pickedColor: $viewModel.pickedColor)
+                    ColorCell(color: .yellow, pickedColor: $viewModel.pickedColor)
+                    ColorCell(color: .green, pickedColor: $viewModel.pickedColor)
+                    PickColorCell(pickedColor: $viewModel.pickedColor)
+                }
+            }
+            .scrollClipDisabled()
+            HStack(spacing: Spacing.medium) {
+                Text("brightness")
+                    .secondaryText()
+                Slider(value: $viewModel.brightness, in: 0...100)
+            }
         }
     }
 }

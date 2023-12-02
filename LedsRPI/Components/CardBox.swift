@@ -23,11 +23,11 @@ struct CardBox<Content: View>: View {
     }
     
     var body: some View {
-        VStack(spacing: spacing) {
+        VStack(alignment: .leading, spacing: spacing) {
             content()
         }
         .padding(padding)
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .background(Colors.cardBackground)
         .cornerRadius(10)
     }

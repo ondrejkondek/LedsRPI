@@ -13,6 +13,12 @@ extension Text {
             .font(Fonts.title)
             .fontWeight(.medium)
     }
+    
+    func secondaryText() -> Text {
+        self.foregroundColor(Colors.primaryText)
+            .font(Fonts.body)
+            .fontWeight(.regular)
+    }
 
     func custom(weight: Font.Weight = .regular, color: Color = Colors.primaryText) -> Text {
         self.fontWeight(weight).foregroundColor(color)

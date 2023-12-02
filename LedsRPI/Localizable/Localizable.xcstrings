@@ -4,6 +4,23 @@
     "" : {
 
     },
+    "brightness" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Brightness"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jas"
+          }
+        }
+      }
+    },
     "colors" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -22,7 +39,20 @@
       }
     },
     "LEDs" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LEDs"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LEDs"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

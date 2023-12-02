@@ -10,4 +10,5 @@ import SwiftUI
 struct Colors {
     static let background = Color("background")
     static let cardBackground = Color("cardBackground")
+    static let primaryText = Color(.white)
 }

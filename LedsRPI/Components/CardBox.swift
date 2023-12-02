@@ -9,16 +9,24 @@ import SwiftUI
 
 struct CardBox<Content: View>: View {
     var content: () -> Content
-
-    init(@ViewBuilder content: @escaping () -> Content) {
+    var padding: CGFloat
+    var spacing: CGFloat
+    
+    init(
+        @ViewBuilder content: @escaping () -> Content,
+         padding: CGFloat = Spacing.medium,
+         spacing: CGFloat = Spacing.medium
+    ) {
         self.content = content
+        self.padding = padding
+        self.spacing = spacing
     }
     
     var body: some View {
-        VStack {
+        VStack(spacing: spacing) {
             content()
         }
-        .padding()
+        .padding(padding)
         .frame(maxWidth: .infinity)
         .background(Colors.cardBackground)
         .cornerRadius(10)

@@ -11,4 +11,8 @@ import SwiftUI
 class ContentViewModel {
     var pickedColor: Color = .white
     var isPowerOn: Bool = false
+    
+    func setColor() {
+        print("setColor: ", pickedColor)
+    }
 }

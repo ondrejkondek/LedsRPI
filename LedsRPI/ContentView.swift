@@ -20,8 +20,19 @@ struct ContentView: View {
                 Spacer(minLength: 220)
                 VStack {
                     CardBox {
-                        Text("Hello")
-                        ColorPicker("Color", selection: $viewModel.pickedColor, supportsOpacity: false)
+                        Text("colors")
+                            .primaryText()
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: Spacing.medium) {
+                                ColorCell(color: .white, pickedColor: $viewModel.pickedColor)
+                                ColorCell(color: .blue, pickedColor: $viewModel.pickedColor)
+                                ColorCell(color: .red, pickedColor: $viewModel.pickedColor)
+                                ColorCell(color: .yellow, pickedColor: $viewModel.pickedColor)
+                                ColorCell(color: .green, pickedColor: $viewModel.pickedColor)
+                                PickColorCell(pickedColor: $viewModel.pickedColor)
+                            }
+                        }
+                        .scrollClipDisabled()
                     }
                     .padding()
                 }
@@ -41,6 +52,14 @@ struct ContentView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("LEDs")
+        .onAppear {
+            UIScrollView.appearance().bounces = false
+        }
+        .onChange(of: viewModel.pickedColor) {
+            if viewModel.isPowerOn {
+                viewModel.setColor()
+            }
+        }
     }
     
     func getPowerOnImage() -> some View {

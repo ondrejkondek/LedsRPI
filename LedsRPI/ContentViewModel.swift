@@ -14,14 +14,19 @@ class ContentViewModel {
     var isPowerOn: Bool = false
     
     let networkManager = NetworkManager()
+    var debounceTimer:Timer?
     
     func setColor() {
-        Task {
-            do {
-                let result = try await networkManager.get(body: MockModel.self)
-                print(result)
-            } catch {
-                print("error")
+        debounceTimer?.invalidate()
+        debounceTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { [weak self] _ in
+            guard let self = self else { return }
+            Task {
+                do {
+                    let request = ApiService.setColor(color: self.pickedColor.getHexString()).request
+                    try await _ = self.networkManager.request(request)
+                } catch {
+                    print("error")
+                }
             }
         }
     }

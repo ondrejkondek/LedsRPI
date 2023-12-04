@@ -32,6 +32,9 @@ struct ContentView: View {
                 Button {
                     print(viewModel.pickedColor)
                     viewModel.isPowerOn.toggle()
+                    if viewModel.isPowerOn {
+                        viewModel.setColor()
+                    }
                 } label: {
                     getPowerOnImage()
                 }

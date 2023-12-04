@@ -8,12 +8,13 @@
 import Foundation
 
 class NetworkManager {
-    static let mockURL = URL(string: "https://random-data-api.com/api/food/random_food")!
-
-    func get<T: Decodable>(url: URL = mockURL, body: T.Type) async throws -> T {
-        let urlRequest = URLRequest(url: url)
-        let (data, response) = try await URLSession.shared.data(for: urlRequest)
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else { fatalError("Error while fetching data") }
+    func request(_ urlRequest: URLRequest) async throws -> URLResponse {
+        let (_, response) = try await URLSession.shared.data(for: urlRequest)
+        return response
+    }
+    
+    func request<T: Decodable>(_ urlRequest: URLRequest, body: T.Type) async throws -> T {
+        let (data, _) = try await URLSession.shared.data(for: urlRequest)
         return try JSONDecoder().decode(T.self, from: data)
     }
 }
